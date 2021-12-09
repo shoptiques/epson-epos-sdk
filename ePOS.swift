@@ -8,7 +8,6 @@
 import Foundation
 
 private var grayscale: Bool { return Defaults.object(for: .printerGrayscale) ?? false }
-private var blackLine: Bool { return Defaults.object(for: .printerBlackLine) ?? false }
 
 class ePOS: NSObject {
   fileprivate let printer: Epos2Printer
@@ -39,7 +38,7 @@ class ePOS: NSObject {
   func print(image: UIImage) {
     printer.add(image, x: 0, y: 0,
                 width:Int(image.size.width),
-                height:Int(image.size.height) - (blackLine ? 0 : 20),
+                height:Int(image.size.height),
                 color: EPOS2_PARAM_DEFAULT,
                 mode: (grayscale ? EPOS2_MODE_GRAY16 : EPOS2_MODE_MONO).rawValue,
                 halftone: EPOS2_HALFTONE_THRESHOLD.rawValue,
